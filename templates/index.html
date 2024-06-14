@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
+  </head>
 
-<script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
+  <script
+    src="https://cdn.plot.ly/plotly-2.32.0.min.js"
+    charset="utf-8"
+  ></script>
 
-<body>
+  <body>
     <h1>FastAPI-Jinja2-Plotly Demo</h1>
 
     <div>
-        <h3>A Graph using Jinja2</h3>
-        {{ plotlyGraph1 | safe }}
+      <h3>A Graph using Jinja2</h3>
+      {{ plotlyGraph1 | safe }}
     </div>
 
     <div>
-        <h3>A Graph using FetchAPI</h3>
-        <div id="plotlyGraph2"></div>
-        <script type="text/javascript">
-            window.PLOTLYENV = window.PLOTLYENV || {};
-          
-            function fetchData() {
-              return fetch('/api')
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error('API Error: ' + response.statusText);
-                  }
-                  return response.json();
-                })
-                .catch(error => {
-                  console.error('Caught Error.', error);
-                });
-            }
-          
-            function plotGraph() {
-              if (document.getElementById("plotlyGraph2")) {
-                fetchData().then(data => {
-                  if (data) {
-                    Plotly.newPlot(
-                      "plotlyGraph2",
-                      [
-                        { x: data.X, y: data.Y, type: "scatter" },
-                      ],
-                      { responsive: true }
-                    );
-                  }
-                });
-              }
-            }
-          
-            plotGraph();
-          </script>
-    </div>
+      <h3>A Graph using FetchAPI</h3>
+      <div id="plotlyGraph2"></div>
+      <script type="text/javascript">
+        window.PLOTLYENV = window.PLOTLYENV || {};
 
-</body>
+        function fetchData() {
+          return fetch("/api")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("API Error: " + response.statusText);
+              }
+              return response.json();
+            })
+            .catch((error) => {
+              console.error("Caught Error.", error);
+            });
+        }
+
+        function plotGraph() {
+          if (document.getElementById("plotlyGraph2")) {
+            fetchData().then((data) => {
+              if (data) {
+                Plotly.newPlot(
+                  "plotlyGraph2",
+                  [{ x: data.X, y: data.Y, type: "scatter" }],
+                  { responsive: true }
+                );
+              }
+            });
+          }
+        }
+
+        plotGraph();
+      </script>
+    </div>
+  </body>
 </html>
